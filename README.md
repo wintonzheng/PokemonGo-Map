@@ -4,6 +4,9 @@
 <img src="https://raw.githubusercontent.com/AHAAAAAAA/PokemonGo-Map/master/static/cover.png">
 </p>
 
+# Example command to run using Google account:
+```python example.py -a google -u xxxx@gmail.com -p xxxx -l "185 Berry Street San Francisco" -st 6 -i pidgey,rattata,zubat,Psyduck,Magikarp,Tentacool,Oddish,Weedle,Caterpie,Spearow,Paras,Venonat,Goldeen,Kakuna,Doduo,Seaking,Pidgeotto,Eevee```
+
 # PokemonGo Map
 
 [![Build Status](https://travis-ci.org/AHAAAAAAA/PokemonGo-Map.svg?branch=master)](https://travis-ci.org/AHAAAAAAA/PokemonGo-Map) [![Coverage Status](https://coveralls.io/repos/github/AHAAAAAAA/PokemonGo-Map/badge.svg?branch=master)](https://coveralls.io/github/AHAAAAAAA/PokemonGo-Map?branch=master)
