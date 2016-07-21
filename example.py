@@ -708,7 +708,7 @@ transform_from_wgs_to_gcj(Location(Fort.Latitude, Fort.Longitude))
             "id": poke.pokemon.PokemonId,
             "name": pokename
         }
-    current = (FLOAT_LAT, FLOAT_LONG)
+    current = (origin_lat, origin_lon)
     for key in pokemons:
         pokemon = pokemons[key]
         poke_spot = (pokemon['lat'], pokemon['lng'])
