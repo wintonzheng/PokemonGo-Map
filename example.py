@@ -1,6 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-
+from geopy.distance import vincenty
+from datetime import datetime
+import json
 import flask
 from flask import Flask, render_template
 from flask_googlemaps import GoogleMaps
@@ -706,6 +708,12 @@ transform_from_wgs_to_gcj(Location(Fort.Latitude, Fort.Longitude))
             "id": poke.pokemon.PokemonId,
             "name": pokename
         }
+    current = (FLOAT_LAT, FLOAT_LONG)
+    for key in pokemons:
+        pokemon = pokemons[key]
+        poke_spot = (pokemon['lat'], pokemon['lng'])
+        distance = vincenty(current, poke_spot).meters
+        print "Name: ", pokemon['name'], "Distance: ", distance, "Dispeartime: ", datetime.fromtimestamp(pokemon['disappear_time']), " http://maps.google.com/maps?z=12&t=m&q=loc:%s+%s" % (pokemon['lat'], pokemon['lng'])
 
 def clear_stale_pokemons():
     current_time = time.time()
