@@ -5,10 +5,18 @@
 </p>
 
 # Example command to run using Google account:
-```python example.py -a google -u xxxx@gmail.com -p xxxx -l "185 Berry Street San Francisco" -st 6 -i pidgey,rattata,zubat,Psyduck,Magikarp,Tentacool,Oddish,Weedle,Caterpie,Spearow,Paras,Venonat,Goldeen,Kakuna,Doduo,Seaking,Pidgeotto,Eevee```
+```python example.py -a google -u xxxx@gmail.com -p xxxx -l "185 Berry Street San Francisco" -st 6 -ar 5000 -i pidgey,rattata,zubat,Psyduck,Magikarp,Tentacool,Oddish,Weedle,Caterpie,Spearow,Paras,Venonat,Goldeen,Kakuna,Doduo,Seaking,Pidgeotto,Eevee```
+
+```
+-ar: auto-refresh interval
+-i: Pokemon to exclude
+-st: number of steps away from you. Increasing this increases the number of iterations in O(n^2)
+-l: text address
+```
 
 # Installation Instructions:
 run `chmod +x Easy Setup/setup.sh`
+
 run `./Easy Setup/setup.sh`
 
 # PokemonGo Map

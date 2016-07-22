@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from geopy.distance import vincenty
-from datetime import datetime
 import json
 import flask
 from flask import Flask, render_template
@@ -24,6 +23,7 @@ from google.protobuf.internal import encoder
 from google.protobuf.message import DecodeError
 from s2sphere import *
 from datetime import datetime
+from datetime import timedelta
 from geopy.geocoders import GoogleV3
 from gpsoauth import perform_master_login, perform_oauth
 from geopy.exc import GeocoderTimedOut, GeocoderServiceError
@@ -55,6 +55,7 @@ SESSION.verify = False
 
 global_password = None
 global_token = None
+global_token_time = datetime.now()
 access_token = None
 DEBUG = True
 VERBOSE_DEBUG = False  # if you want to write raw request/response to the console
@@ -424,13 +425,17 @@ def get_token(service, username, password):
     :return:
     :rtype:
     """
-
     global global_token
-    if global_token is None:
+    global global_token_time
+
+    token_time_elapsed = datetime.now() - global_token_time
+    if not global_token or token_time_elapsed > timedelta(minutes=20):
         if service == 'ptc':
             global_token = login_ptc(username, password)
         else:
             global_token = login_google(username, password)
+
+        global_token_time = datetime.now()
         return global_token
     else:
         return global_token
@@ -658,7 +663,7 @@ def process_step(args, api_endpoint, access_token, profile_response,
                 for wild in cell.WildPokemon:
                     hash = wild.SpawnPointId;
                     if hash not in seen.keys() or (seen[hash].TimeTillHiddenMs <= wild.TimeTillHiddenMs):
-                        visible.append(wild)    
+                        visible.append(wild)
                     seen[hash] = wild.TimeTillHiddenMs
                 if cell.Fort:
                     for Fort in cell.Fort:
