@@ -412,7 +412,9 @@ def get_heartbeat(service,
 
     try:
         payload = response.payload[0]
-    except (AttributeError, IndexError):
+    except (AttributeError, IndexError) as e:
+        print("Response: %s" % response)
+        print("Error: %s" % e)
         return
 
     heartbeat = pokemon_pb2.ResponseEnvelop.HeartbeatPayload()
@@ -685,7 +687,7 @@ transform_from_wgs_to_gcj(Location(Fort.Latitude, Fort.Longitude))
                                 if (expire_time != 0 or not args.onlylure):
                                     pokestops[Fort.FortId] = [Fort.Latitude,
                                                               Fort.Longitude, expire_time]
-        except AttributeError:
+        except AttributeError as e:
             break
 
     for poke in visible:
